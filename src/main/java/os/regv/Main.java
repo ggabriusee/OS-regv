@@ -23,13 +23,13 @@ public class Main {
 
 	public static void main(String args[]) {
                 init();
-		Resource r = new Resource(ResourceType.PROGRAM_FROM_FLASH);
+		Resource r = new Resource(ResourceType.PROG_VYKD);
 		FromGUIDescriptor descriptor = new FromGUIDescriptor();
 		descriptor.setFileName("programa1.txt");
 		r.setDescriptor(descriptor);
 		resourceList.addResource(r);
 		
-//		r = new Resource(ResourceType.PROGRAM_FROM_FLASH);
+//		r = new Resource(ResourceType.PROG_VYKD);
 //		descriptor = new FromGUIDescriptor();
 //		descriptor.setFileName("Fibo_2.ltu");
 //		r.setDescriptor(descriptor);

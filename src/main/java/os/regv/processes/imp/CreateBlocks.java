@@ -37,7 +37,7 @@ public class CreateBlocks extends Process {
 	public void nextStep() {
 		switch (this.step) {
 		case 0:
-			if (Main.resourceList.searchResource(ResourceType.PROGRAM_IN_SUPERVISOR) != null) {
+			if (Main.resourceList.searchResource(ResourceType.PROG_SUPER) != null) {
 				this.changeStep(1);
 			} else {
 				this.changeStep(0);
@@ -46,12 +46,12 @@ public class CreateBlocks extends Process {
 		case 1:
 			// Tikrinamas programos validumas
 			// Jei programa nekorektiška, gražiname atitinkamą klaidos pranešimą
-			Resource r = Main.resourceList.searchResource(ResourceType.PROGRAM_IN_SUPERVISOR);
+			Resource r = Main.resourceList.searchResource(ResourceType.PROG_SUPER);
 			r.setParent(this);
 			ProgramInSupervisorDescriptor descriptor = (ProgramInSupervisorDescriptor) r.getDescriptor();
 			this.programName = descriptor.getProgramName();
                         this.br = descriptor.getBr();
-			Main.resourceList.deleteChildResource(this, ResourceType.PROGRAM_IN_SUPERVISOR);
+			Main.resourceList.deleteChildResource(this, ResourceType.PROG_SUPER);
 
 			try {
                             if(programName.length() >= 16){
@@ -62,7 +62,7 @@ public class CreateBlocks extends Process {
                             this.changeStep(2);
 			} catch (Exception e) {
                             e.printStackTrace();
-				Resource resource = new Resource(ResourceType.LI_IN_MEM);
+				Resource resource = new Resource(ResourceType.EILUTE_ATM);
                                 //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + programName.length());
                                 //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + programName);
                                 //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + e.getMessage());
@@ -82,7 +82,7 @@ public class CreateBlocks extends Process {
 			execDescriptor.setEndAddress(byteCodeStart + this.byteCode.length
 					+ 1);
                          */
-			Resource res = new Resource(ResourceType.EXEC_PAR);
+			Resource res = new Resource(ResourceType.VYKD_PAR);
 			res.setDescriptor(execDescriptor);
 			Main.resourceList.addResource(res);
 			this.changeStep(0);

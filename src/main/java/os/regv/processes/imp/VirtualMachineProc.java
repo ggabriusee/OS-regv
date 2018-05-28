@@ -102,7 +102,7 @@ public class VirtualMachineProc extends Process {
                 CPU.setTIMER(CPU.TIMER_CONST);
                 //while (!exec.executeNext()){}
                 int i = vm(vmm);
-                Resource interrupt = new Resource(ResourceType.INT);
+                Resource interrupt = new Resource(ResourceType.PERTR);
                 interrupt.setParent(parentOfVM);
                 //interrupt.setDescriptor(InterruptHandler.getInt());
                 interrupt.setDescriptor(InterruptHandler.intDetected(i, vmm));

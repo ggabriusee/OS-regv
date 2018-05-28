@@ -38,11 +38,11 @@ public class GetProgramData extends Process {
 		switch (this.step) {
 		case (0):
 			// Blokuojam kol sulaukiam resurso "Iš vartojo sąsajos
-			res = Main.resourceList.searchResource(ResourceType.PROGRAM_FROM_FLASH);
+			res = Main.resourceList.searchResource(ResourceType.PROG_VYKD);
 			if (res != null) {
 				FromGUIDescriptor descriptor = (FromGUIDescriptor) res.getDescriptor();
 				this.fileName = descriptor.getFileName();
-				Main.resourceList.delete(ResourceType.PROGRAM_FROM_FLASH);
+				Main.resourceList.delete(ResourceType.PROG_VYKD);
 				this.changeStep(this.step + 1);
 			} else {
 				this.changeStep(0);
@@ -56,7 +56,7 @@ public class GetProgramData extends Process {
 				this.changeStep(this.step + 1);
 			} catch (IOException e) {
 				e.printStackTrace();
-				Resource r = new Resource(ResourceType.LI_IN_MEM);
+				Resource r = new Resource(ResourceType.EILUTE_ATM);
 				r.setDescriptor(new PrintDescriptor("Failed to open  "
 						+ this.fileName + " file!"));
 				Main.resourceList.addResource(r);
@@ -64,7 +64,7 @@ public class GetProgramData extends Process {
 			}
 			break;
 		case (2):
-			res = Main.resourceList.searchResource(ResourceType.SUP_MEM);
+			res = Main.resourceList.searchResource(ResourceType.SUPERVIZ_ATM);
 			if (res != null) {
 				if (res.getParent() == null) {
 					res.setParent(this);
@@ -78,7 +78,7 @@ public class GetProgramData extends Process {
 			break;
 		case (3):
 			// Kopijuojam blokus į supervizorinę atmintį
-			res = Main.resourceList.searchResource(ResourceType.SUP_MEM);
+			res = Main.resourceList.searchResource(ResourceType.SUPERVIZ_ATM);
 			if (res != null) {
 				if (res.getParent() == this) {
 					res.removeParent();
@@ -91,7 +91,7 @@ public class GetProgramData extends Process {
                                             programName = br.readLine();
                                            this.changeStep(this.step + 1);
                                         }catch(Exception e){
-                                                    Resource r = new Resource(ResourceType.LI_IN_MEM);
+                                                    Resource r = new Resource(ResourceType.EILUTE_ATM);
                                                     r.setDescriptor(new PrintDescriptor("No STRT detected"));
                                                     Main.resourceList.addResource(r);
                                                     this.changeStep(0);
@@ -106,7 +106,7 @@ public class GetProgramData extends Process {
 			break;
 		case (4):
 			// Sukuriamas resursas "Užduotis supervizorinėje atmintyje"
-			Resource r = new Resource(ResourceType.PROGRAM_IN_SUPERVISOR);
+			Resource r = new Resource(ResourceType.PROG_SUPER);
 			ProgramInSupervisorDescriptor descriptor = new ProgramInSupervisorDescriptor();
 			descriptor.setBr(this.br);
 			descriptor.setProgramName(this.programName);

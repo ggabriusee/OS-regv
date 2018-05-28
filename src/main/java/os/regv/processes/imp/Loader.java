@@ -27,7 +27,7 @@ public class Loader extends Process {
 		switch (this.step) {
 		case (0):
 			// Blokuotas, laukiam resurso "Pakrovimo paketas"
-			res = Main.resourceList.searchResource(ResourceType.LOAD_PACK);
+			res = Main.resourceList.searchResource(ResourceType.PAKROVIMO_PAK);
 			if (res != null) {
 				LoaderPacketDescriptor descriptor = (LoaderPacketDescriptor) res.getDescriptor();
 				this.jg = (JobGovernor) res.getParent();
@@ -41,7 +41,7 @@ public class Loader extends Process {
 			break;
 		case (1):
 			// Blokuotas, laukiam resurso "Kanalų įrenginys"
-			res = Main.resourceList.searchResource(ResourceType.CH_DEV);
+			res = Main.resourceList.searchResource(ResourceType.KANALU_IRENG);
 			if (res != null) {
 				if (res.getParent() == null) {
 					res.setParent(this);
@@ -64,17 +64,17 @@ public class Loader extends Process {
 			break;
 		case (3):
 			// Atlaisvinam "Kanalų įrenginys" resursą
-			res = Main.resourceList.searchResource(ResourceType.CH_DEV);
+			res = Main.resourceList.searchResource(ResourceType.KANALU_IRENG);
 			res.removeParent();
 			this.changeStep(4);
 			break;
 		case (4):
 			// Sukuriamas "Iš loader" resursas, skirtas JobGovernor procesui
 			// sukūrusiam gautąjį "Pakrovimo paketo" resursą
-			res = new Resource(ResourceType.PACK_FROM_LOAD);
+			res = new Resource(ResourceType.PAKROVIMO_PAK_RES);
 			res.setParent(this.jg);
 			Main.resourceList.addResource(res);
-			Main.resourceList.deleteChildResource(this, ResourceType.LOAD_PACK);
+			Main.resourceList.deleteChildResource(this, ResourceType.PAKROVIMO_PAK);
 			this.changeStep(0);
 			break;
 		}
