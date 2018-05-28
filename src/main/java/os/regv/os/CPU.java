@@ -18,15 +18,22 @@ import lombok.Data;
 public class CPU {
     
     private ArrayList<Integer> page;
+    private ArrayList<Memory> memoryList;
+    //private ArrayList<Memory> memoryList2;
     private Memory mem;
+    private Memory mem1;
+    private Memory mem2;
+    public static boolean jauBuvo;
     private int PTR = 0;
     //private int PI = 0;
     public static final int TIMER_CONST = 10;
     private static short IP = 0;
+    private int block;
+    private int word;
     /**
-     * 0 - vartotojo režimas, 1 - supervizoriaus režimas
+     * 1 - vartotojo režimas, 0 - supervizoriaus režimas
      */
-    private static byte MODE = 0;
+    private static byte MODE = 1;
     /**
      * supervizoriaus pertraukimas
      */
@@ -72,6 +79,11 @@ public class CPU {
         //page.add(Integer.parseInt(pg));
         page.add((int) mem.allocate_Memory());
         PTR = 30;
+        block=0;
+        word=0;
+        memoryList = new ArrayList<Memory>();
+        //memoryList2 = new ArrayList<Memory>();
+        jauBuvo = false;
     }
     
     public void set_program_name(String name) throws Exception{
@@ -99,8 +111,8 @@ public class CPU {
     }
     
     public void scanCommands(BufferedReader br) throws IOException{
-      int block = 0;
-      int word  = 0;
+      //int block = 0;
+      //int word  = 0;
       String buffer;
       //Komandu skaitymas is failo
       while ((buffer = br.readLine()) != null){
@@ -126,6 +138,17 @@ public class CPU {
             } 
 
         }
+     if(jauBuvo == false){
+        mem1 = mem;
+        jauBuvo = true;
+     }else{
+         mem2 = mem;
+     }
+     
+      //mem.show_Memory();
+      block = block + 10;
+      word = 0;
+      
     }
     public static byte getEND() {
         return END;
@@ -184,5 +207,12 @@ public class CPU {
         return STI;
     }
 
+//     public static boolean getJauBuvo() {
+//        return jauBuvo;
+//    }
+//     
+//     public static void setJauBuvo(boolean t) {
+//        jauBuvo = t;
+//    }
 
 }

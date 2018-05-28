@@ -68,8 +68,11 @@ public class VirtualMachine {
         output="";
         //String pg = Long.toString(mem.allocate_Memory());
         //page.add(Integer.parseInt(pg));
-        page.add((int) mem.allocate_Memory());
+        //page.add((int) mem.allocate_Memory());
+        page.add(0);
         PTR = 30;
+        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        //mem.show_Memory();
     }
     
     
@@ -235,10 +238,10 @@ public void go(int block, int word){
                            (char)((adr & 0xFF00) / 0x100), (char)((adr & 0xFF)) };
       char[] value2 = { (char)((R & 0xFF000000) / 0x1000000), (char)((R & 0xFF0000) / 0x10000), 
                            (char)((R & 0xFF00) / 0x100), (char)((R & 0xFF)) }; 
-  
+	
       //Gaunami desimtainiai skaiciai
-      int get_value_1 = Integer.parseInt(new String(value1));
-      int get_value_2 = Integer.parseInt(new String(value2));
+	int get_value_1 = Integer.parseInt(new String(value1));
+	int get_value_2 = Integer.parseInt(new String(value2));
 
       int total_sum = get_value_1 + get_value_2;
 

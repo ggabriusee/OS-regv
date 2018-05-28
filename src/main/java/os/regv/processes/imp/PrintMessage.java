@@ -4,6 +4,7 @@ import os.regv.Main;
 //>>>>import os.regv.hardware.ChannelsDevice.ChannelsDevice;
 //>>>>import os.regv.hardware.memory.RMMemory;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.PrintDescriptor;
@@ -20,6 +21,9 @@ public class PrintMessage extends Process {
 	private int endAddress;
         private String mes;
 
+        public PrintMessage() {
+		this.type = ProcessType.SYSTEM;
+        }
 	@Override
 	public void nextStep() {
 		Resource res;
