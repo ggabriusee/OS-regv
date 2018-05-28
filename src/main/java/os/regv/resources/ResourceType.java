@@ -6,23 +6,23 @@ package os.regv.resources;
  */
 public class ResourceType {
     
-    public static final String VIRT_MEM = "VIRTUAL_MEMORY";
-    public static final String SUP_MEM = "SUPERVISOR_MEMORY";
-    public static final String EXT_MEM = "EXTERNAL_MEMORY";
-    public static final String USER_MEM = "USER_MEMORY";
-    public static final String FILE_NAME = "FILE_NAME_OF_PROGRAM";
-    public static final String LOAD_PACK = "LOADER_PACKET";
-    public static final String PACK_FROM_LOAD = "PACKET_FROM_LOADER";
-    public static final String INT = "INTERRUPT_RESOURCE";
-    public static final String FROM_INT = "INTERRUPT_RESOURCE_FROM_PROCESS";
-    public static final String CH_DEV = "CHANNELS_DEVICE";
-    public static final String EXEC_PAR = "EXECUTION_PARAMETERS";
-    public static final String TASK_IN_EXT_MEM = "TASK_IN_EXTERNAL_MEMORY";
-    public static final String LI_IN_MEM = "LINE_IN_MEMORY";
-    public static final String LI_TO_PR = "LINE_TO_PRINT";
+    public static final String VIRT_ATM = "VIRTUALI_ATMINTIS";
+    public static final String SUPERVIZ_ATM = "SUPERVIZORINE_ATMINTIS";
+    public static final String ISOR_ATM = "ISORINE_ATMINTIS";
+    public static final String VARTOT_ATM = "VARTOTOJO_ATMINTIS";
+    public static final String FAILO_VARDAS = "FAILO_PROGRAMOS_PAVADINIMAS";
+    public static final String PAKROVIMO_PAK = "PAKROVIMO_PAKETAS";
+    public static final String PAKROVIMO_PAK_RES = "PAKROVIMO_PAKETO_RESURSAS";
+    public static final String PERTR = "PERTRAUKIMO_RESURSAS";
+    public static final String PROC_PERTR = "PERTRAUKIMO_RESURSAS_IS_PROCESO";
+    public static final String KANALU_IRENG = "KANALU_IRENGINYS";
+    public static final String VYKD_PAR = "VYKDOMI_PARAMETRAI";
+    public static final String UZD_ISOR_ATM_ = "UZDUOTIS_ISORINEI_ATMINTY";
+    public static final String EILUTE_ATM = "EILUTE_ATMINTYJE";
+    public static final String EILUTE_PRINT = "EILUTE_SPAUSDINIMUI";
     public static final String CPU = "CENTRAL_PROCESSING_UNIT";
-    public static final String END = "END_OF_OPERATING_SYSTEM";
-    public static final String PROGRAM_IN_SUPERVISOR = "PROGRAM_IN_SUPERVISOR";
-    public static final String PROGRAM_FROM_FLASH = "PROGRAM_FROM_FLASH";
-    public static final String PROGRAM_IN_HDD = "PROGRAM_IN_HDD";
+    public static final String END = "OS_DARBO_PABAIGA";
+    public static final String PROG_SUPER = "SUPERVIZORINE_PROGRAMA";
+    public static final String PROG_VYKD = "PROGRAMA_VYKDYMUI";
+    public static final String HARD_PROG = "PROGRAMA_HARD_DISK";
 }

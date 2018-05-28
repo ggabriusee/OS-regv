@@ -28,7 +28,7 @@ public class MainProc extends Process {
 		switch (this.step) {
 		case (0):
 			// Blokuojam, laukiam resurso "Užduotis būge" resurso
-			res = Main.resourceList.searchChildResource(null, ResourceType.PROGRAM_IN_HDD);
+			res = Main.resourceList.searchChildResource(null, ResourceType.HARD_PROG);
 			if (res != null) {
 				this.changeStep(1);
 			} else {
@@ -38,7 +38,7 @@ public class MainProc extends Process {
 		case (1):
 			// Tikrinam vygdymo laiką
 			// step = time > 0 ? 2 : 3
-			res = Main.resourceList.searchChildResource(null, ResourceType.PROGRAM_IN_HDD);
+			res = Main.resourceList.searchChildResource(null, ResourceType.HARD_PROG);
 			des = (ProgramInHDDDescriptor) res.getDescriptor();
 			if (des.isFromSaver()) {
 				this.changeStep(2);
@@ -53,7 +53,7 @@ public class MainProc extends Process {
 			// Kuriamas procesas JobGovernor ir
 			// resursas "Užduotis bugne" perduodamas jam
 			res = Main.resourceList.searchChildResource(this,
-					ResourceType.PROGRAM_IN_HDD);
+					ResourceType.HARD_PROG);
 			JobGovernor jg = new JobGovernor(res);
 			res.setParent(jg);
 			Main.processQueue.add(jg);

@@ -71,7 +71,7 @@ public class JobGovernor extends Process {
                 ProgramInHDDDescriptor progInHddDes = (ProgramInHDDDescriptor) progInHddRes.getDescriptor();
                 int[] filename = progInHddDes.getProgramName();
 
-                Resource loaderPacket = new Resource(ResourceType.LOAD_PACK);
+                Resource loaderPacket = new Resource(ResourceType.PAKROVIMO_PAK);
                 loaderPacket.setParent(this);
                 LoaderPacketDescriptor loadDes = new LoaderPacketDescriptor();
                 loadDes.setMemory(vmm.getMem());
@@ -83,7 +83,7 @@ public class JobGovernor extends Process {
                 
                 break;
             case (2):
-                fromLoader = Main.resourceList.searchChildResource(this, ResourceType.PACK_FROM_LOAD);
+                fromLoader = Main.resourceList.searchChildResource(this, ResourceType.PAKROVIMO_PAK_RES);
                 if (fromLoader != null) {
                     this.changeStep(3);
                 } else {
@@ -100,7 +100,7 @@ public class JobGovernor extends Process {
                 
                 break;
             case (4):
-                intRes = Main.resourceList.searchChildResource(this, ResourceType.FROM_INT);
+                intRes = Main.resourceList.searchChildResource(this, ResourceType.PROC_PERTR);
                 if (intRes != null) {
                     this.changeStep(5);
                 } else {

@@ -30,7 +30,7 @@ public class PrintMessage extends Process {
 		switch (this.step) {
 		case (0):
 			// Blokuotas, laukiam "Eilutė atmintyje" resurso
-			res = Main.resourceList.searchResource(ResourceType.LI_IN_MEM);
+			res = Main.resourceList.searchResource(ResourceType.EILUTE_ATM);
 			if (res != null) {
 				PrintDescriptor descriptor = (PrintDescriptor) res.getDescriptor();
 				res.setParent(this);
@@ -45,7 +45,7 @@ public class PrintMessage extends Process {
 			break;
 		case (1):
 			// Blokuotas, laukiam "Kanalų įrenginio" resurso
-			res = Main.resourceList.searchResource(ResourceType.CH_DEV);
+			res = Main.resourceList.searchResource(ResourceType.KANALU_IRENG);
 			if (res != null) {
 				if (res.getParent() == null || res.getParent() == this) {
 					res.setParent(this);
@@ -77,9 +77,9 @@ public class PrintMessage extends Process {
 			break;
 		case (3):
 			// Atlaisvinamas "Kanalų įrenginys" resursas
-			res = Main.resourceList.searchResource(ResourceType.CH_DEV);
+			res = Main.resourceList.searchResource(ResourceType.KANALU_IRENG);
 			res.removeParent();
-			Main.resourceList.deleteChildResource(this, ResourceType.LI_IN_MEM);
+			Main.resourceList.deleteChildResource(this, ResourceType.EILUTE_ATM);
 			this.changeStep(0);
 			break;
 		}

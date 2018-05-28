@@ -23,11 +23,11 @@ public class StartStop extends Process {
 		switch (step) {
 		case 0:
 			// Sisteminiu resursų inicializacija
-			Main.resourceList.addResource(new Resource(ResourceType.EXT_MEM));
-			Main.resourceList.addResource(new Resource(ResourceType.USER_MEM));
+			Main.resourceList.addResource(new Resource(ResourceType.ISOR_ATM));
+			Main.resourceList.addResource(new Resource(ResourceType.VARTOT_ATM));
 			Main.resourceList.addResource(new Resource(ResourceType.CPU));
-			Main.resourceList.addResource(new Resource(ResourceType.SUP_MEM));
-			Main.resourceList.addResource(new Resource(ResourceType.CH_DEV));
+			Main.resourceList.addResource(new Resource(ResourceType.SUPERVIZ_ATM));
+			Main.resourceList.addResource(new Resource(ResourceType.KANALU_IRENG));
 			this.changeStep(this.step + 1);
 			break;
 		case 1:

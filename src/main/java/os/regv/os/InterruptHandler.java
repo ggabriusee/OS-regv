@@ -37,9 +37,9 @@ public class InterruptHandler {
             return false;
 
         } else if (intDes.getType() == Type.SI) {
-            Resource liRes = Main.resourceList.searchChildResource(parentOfVM, ResourceType.LI_TO_PR);
+            Resource liRes = Main.resourceList.searchChildResource(parentOfVM, ResourceType.EILUTE_PRINT);
             LineToPrintDescriptor liDes = (LineToPrintDescriptor) liRes.getDescriptor();
-            Resource r = new Resource(ResourceType.LI_IN_MEM);
+            Resource r = new Resource(ResourceType.EILUTE_ATM);
             r.setDescriptor(new PrintDescriptor(Integer.toString(liDes.getLine())));
             Main.resourceList.addResource(r);
             return true;
@@ -63,13 +63,13 @@ public class InterruptHandler {
             return false;
             
         } else if (intDes.getType() == Type.PI) {
-            Resource r = new Resource(ResourceType.LI_IN_MEM);
+            Resource r = new Resource(ResourceType.EILUTE_ATM);
             r.setDescriptor(new PrintDescriptor(intDes.getError()));
             Main.resourceList.addResource(r);
             return false;
 
         } else if (intDes.getType() == Type.SI) {
-            Resource r = new Resource(ResourceType.LI_IN_MEM);
+            Resource r = new Resource(ResourceType.EILUTE_ATM);
             r.setDescriptor(new PrintDescriptor(intDes.getError()));
             Main.resourceList.addResource(r);
             return true;

@@ -29,7 +29,7 @@ public class Interrupt extends Process {
     public void nextStep() {
         switch (this.step) {
             case (0):
-                interrupt = Main.resourceList.searchResource(ResourceType.INT);
+                interrupt = Main.resourceList.searchResource(ResourceType.PERTR);
                 if (interrupt != null) {
                     this.changeStep(1);
                 } else {
@@ -47,7 +47,7 @@ public class Interrupt extends Process {
                 this.changeStep(3);
                 break;
             case (3):
-                Resource fromInt = new Resource(ResourceType.FROM_INT);
+                Resource fromInt = new Resource(ResourceType.PROC_PERTR);
                 fromInt.setDescriptor(intDes);
                 fromInt.setParent(jobGovernor);
                 Main.resourceList.addResource(fromInt);

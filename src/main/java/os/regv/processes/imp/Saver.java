@@ -34,7 +34,7 @@ public class Saver extends Process {
 		case (0):
 			// Blokuotas, laukiam resurso "Užduoties vykdymo parametrai
 			// supervizorinėje atmintyje" resurso
-			res = Main.resourceList.searchResource(ResourceType.EXEC_PAR);
+			res = Main.resourceList.searchResource(ResourceType.VYKD_PAR);
 			if (res != null) {
 				ExecParamsDescriptor descriptor = (ExecParamsDescriptor) res.getDescriptor();
 				res.setParent(this);
@@ -56,7 +56,7 @@ public class Saver extends Process {
 			break;
 		case (1):
 			// Blokuotas laukiant "Išorinė atmintis" resurso
-			res = Main.resourceList.searchResource(ResourceType.EXT_MEM);
+			res = Main.resourceList.searchResource(ResourceType.ISOR_ATM);
 			if (res != null) {
 				if (res.getParent() == null || res.getParent() == this) {
 					res.setParent(this);
@@ -72,7 +72,7 @@ public class Saver extends Process {
 			break;
 		case (2):
 			// Blokuotas laukiant "Kanalų įrenginys" resurso
-			res = Main.resourceList.searchResource(ResourceType.CH_DEV);
+			res = Main.resourceList.searchResource(ResourceType.KANALU_IRENG);
 			if (res != null) {
 				if (res.getParent() == null || res.getParent() == this) {
 					res.setParent(this);
@@ -88,7 +88,7 @@ public class Saver extends Process {
 			break;
 		case (3):
 			// Nustatinėjami kanalų įrenginio registra ir vygdoma komanda "XCHG"
-			res = Main.resourceList.searchChildResource(this, ResourceType.EXEC_PAR);
+			res = Main.resourceList.searchChildResource(this, ResourceType.VYKD_PAR);
 			if (res != null) {
                             /* hmmmmmmmmmmmm
 				ChannelsDevice.ST = 2; // Šaltinis: supervizorinė atmintis
@@ -109,7 +109,7 @@ hmmmmmmmmmmmmmmm*/
 			break;
 		case (4):
 			// Atlaisvinamas "Kanalo įrenginys" resursas
-			res = Main.resourceList.searchResource(ResourceType.CH_DEV);
+			res = Main.resourceList.searchResource(ResourceType.KANALU_IRENG);
 			res.removeParent();
 			this.changeStep(5);
 			break;
@@ -117,10 +117,10 @@ hmmmmmmmmmmmmmmm*/
 			// Sukuriamas "Užduotis bugne" resursas
 			ProgramInHDDDescriptor descriptor = new ProgramInHDDDescriptor();
 			descriptor.setProgramName(this.programName);
-			res = new Resource(ResourceType.PROGRAM_IN_HDD);
+			res = new Resource(ResourceType.HARD_PROG);
 			res.setDescriptor(descriptor);
 			Main.resourceList.addResource(res);
-			Main.resourceList.deleteChildResource(this, ResourceType.EXEC_PAR);
+			Main.resourceList.deleteChildResource(this, ResourceType.VYKD_PAR);
 			this.changeStep(0);
 			break;
 		}
