@@ -57,9 +57,9 @@ public class InterruptHandler {
 */
     public boolean fix() {
         if (intDes.getType() == Type.END) {
-            Resource r = new Resource(ResourceType.END);
-            r.setDescriptor(new PrintDescriptor(intDes.getError()));
-            Main.resourceList.addResource(r);
+            //Resource r = new Resource(ResourceType.END);
+            //r.setDescriptor(new PrintDescriptor(intDes.getError()));
+            //Main.resourceList.addResource(r);
             return false;
             
         } else if (intDes.getType() == Type.PI) {
@@ -156,7 +156,7 @@ public class InterruptHandler {
 
         }else if(x==0){
             des = new InterruptDescriptor();
-            des.setError("Interrupt code " + String.valueOf(x) + "\n" + "Shuting down\n");
+            //des.setError("Interrupt code " + String.valueOf(x) + "\n" + "Shuting down\n");
             des.setType(InterruptDescriptor.Type.END);
         }
         //exit(1);

@@ -68,8 +68,11 @@ public class VirtualMachine {
         output="";
         //String pg = Long.toString(mem.allocate_Memory());
         //page.add(Integer.parseInt(pg));
-        page.add((int) mem.allocate_Memory());
+        //page.add((int) mem.allocate_Memory());
+        page.add(0);
         PTR = 30;
+        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        //mem.show_Memory();
     }
     
     
@@ -231,13 +234,15 @@ public void go(int block, int word){
 
     //Registras + atminties adresas
     public long addition(long adr){
-
-      long value1[] = { (adr & 0xFF000000) / 0x1000000, (adr & 0xFF0000) / 0x10000, (adr & 0xFF00) / 0x100, adr & 0xFF };
-      long value2[] = { (R & 0xFF000000) / 0x1000000, (R & 0xFF0000) / 0x10000, (R & 0xFF00) / 0x100, R & 0xFF };  
-
+      char[] value1 = { (char)((adr & 0xFF000000) / 0x1000000), (char)((adr & 0xFF0000) / 0x10000), 
+                           (char)((adr & 0xFF00) / 0x100), (char)((adr & 0xFF)) };
+      char[] value2 = { (char)((R & 0xFF000000) / 0x1000000), (char)((R & 0xFF0000) / 0x10000), 
+                           (char)((R & 0xFF00) / 0x100), (char)((R & 0xFF)) }; 
+	
       //Gaunami desimtainiai skaiciai
-      int get_value_1 = (int) ((value1[0])*1000 + (value1[1])*100 + (value1[2])*10 + value1[3]);
-      int get_value_2 = (int) ((value2[0])*1000 + (value2[1])*100 + (value2[2])*10 + value2[3]);
+	int get_value_1 = Integer.parseInt(new String(value1));
+	int get_value_2 = Integer.parseInt(new String(value2));
+
       int total_sum = get_value_1 + get_value_2;
 
       if (total_sum > 9999){
@@ -247,11 +252,12 @@ public void go(int block, int word){
       int sum1 = total_sum/1000;
       int sum2 = (total_sum%1000)/100;
       int sum3 = (total_sum%100)/10;
-      int sum4 = total_sum%10;   
-      sum1 = sum1 + 48;
-      sum2 = sum2 + 48; 
-      sum3 = sum3 + 48; 
-      sum4 = sum4 + 48;
+      int sum4 = total_sum%10;
+  
+      sum1 = sum1 + '0';
+      sum2 = sum2 + '0'; 
+      sum3 = sum3 + '0'; 
+      sum4 = sum4 + '0';
 
       return (sum1 * 0x1000000 + sum2 * 0x10000 + sum3 * 0x100 + sum4);
     }

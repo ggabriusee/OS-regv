@@ -5,6 +5,7 @@ import os.regv.os.HardDisk;
 //import os.regv.hardware.ChannelsDevice.ChannelsDevice;
 //import os.regv.hardware.HDD.Utilities;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.ExecParamsDescriptor;
@@ -23,6 +24,9 @@ public class Saver extends Process {
 	private int startAddress;
 	private int endAddress;
 
+        public Saver(){
+            this.type = ProcessType.SYSTEM;
+        }
 	@Override
 	public void nextStep() {
 		Resource res;

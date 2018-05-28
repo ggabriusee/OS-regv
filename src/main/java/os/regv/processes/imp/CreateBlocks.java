@@ -7,6 +7,7 @@ import java.util.Iterator;
 import os.regv.Main;
 //import os.regv.hardware.memory.RMMemory;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.ExecParamsDescriptor;
@@ -33,6 +34,10 @@ public class CreateBlocks extends Process {
         BufferedReader br;
 	private String programName;
 
+        public CreateBlocks() {
+		this.type = ProcessType.SYSTEM;
+        }
+        
 	@Override
 	public void nextStep() {
 		switch (this.step) {
@@ -59,6 +64,7 @@ public class CreateBlocks extends Process {
                             }
                             os.regv.Main.cpu.set_program_name(programName);
                             os.regv.Main.cpu.scanCommands(br);
+                            //os.regv.Main.cpu.getMemoryList().remove(0).show_Memory();
                             this.changeStep(2);
 			} catch (Exception e) {
                             e.printStackTrace();

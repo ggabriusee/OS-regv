@@ -12,31 +12,32 @@ package os.regv.os;
 public class Memory {
 // Veikimo principas
 // Nuo 30 bloka prasideda puslapiu lentele
-    private long[][] memory ;
+    private long[][] memory = new long[33][10]; ;
 
-    public Memory(){memory = new long[33][10];}
+    public Memory(){}
+    public Memory(long[][] m){this.memory = m;}
     
     public long[][] getMemory(){
-        return memory;
+        return this.memory;
     }
 public long allocate_Memory(){
 //Puslpiu bloko adresas
   int paging_adr = 30;      
   
-  while ((memory[paging_adr][0] != 0) && (paging_adr < 33)) paging_adr++;  
+  while ((this.memory[paging_adr][0] != 0) && (paging_adr < 33)) paging_adr++;  
   //Atmintyje nera laisvos vietos puslapiams
-  if (memory[paging_adr][0] != 0) return 0; 
+  if (this.memory[paging_adr][0] != 0) return 0; 
   
   // Vieta kur prasideda programos kodas
   // skiriami 5 blokai
   int progr_adr = (paging_adr % 30) * 10 + 1;
-  memory[paging_adr][0] = progr_adr;
+  this.memory[paging_adr][0] = progr_adr;
 
   for (int i = 1; i <= 5; ++i){
-    memory[paging_adr][i] = 5 + progr_adr++ ;
+    this.memory[paging_adr][i] = 5 + progr_adr++ ;
   }
 
-  return memory[paging_adr][0];
+  return this.memory[paging_adr][0];
 }
 
 //check_Memory, kurio paskirtis - tikrinti ar yra laisvas atminties laukas.
@@ -46,7 +47,7 @@ public boolean check_Memory(int x){
   
   for (i = 30; i < 33; i++){
     for (j = 0; j < 10; j++){
-      if ((free) && (x == memory[i][j] - 1)) free = false; 
+      if ((free) && (x == this.memory[i][j] - 1)) free = false; 
     }
   }
   return free;
@@ -63,19 +64,20 @@ public void show_Memory(){
     if (i < 10) System.out.printf("%d  | ", i);
     else System.out.printf("%d | ", i);
     for (j = 0; j < 10; j++){
-      if (memory[i][j] != 0){
+      if (this.memory[i][j] != 0){
         if(i < 30 || (i >= 30 && j > 5)){
-          char[] character = { (char)((memory[i][j] & 0xFF000000) / 0x1000000),
-                                (char)((memory[i][j] & 0xFF0000) / 0x10000), 
-                                (char)((memory[i][j] & 0xFF00) / 0x100), 
-                                (char)((memory[i][j] & 0xFF))};
+          char[] character = { (char)((this.memory[i][j] & 0xFF000000) / 0x1000000),
+                                (char)((this.memory[i][j] & 0xFF0000) / 0x10000), 
+                                (char)((this.memory[i][j] & 0xFF00) / 0x100), 
+                                (char)((this.memory[i][j] & 0xFF))};
 
           System.out.printf("%c%c%c%c ", character[0], 
                               character[1], 
                               character[2], 
                               character[3]);
-        }else{
-          System.out.printf("%-5d", memory[i][j]);
+        }else {
+          System.out.printf("%-5d", this.memory[i][j]);
+          
         }
       }else{
         System.out.printf("0    ");
