@@ -16,24 +16,24 @@ public class Main {
 
 	public static boolean running = false;
 
-	public static void init() {
+	public static void main(String args[]) {
                 cpu = new CPU();
 		processQueue.add(new StartStop());
-	}
 
-	public static void main(String args[]) {
-                init();
-		Resource r = new Resource(ResourceType.PROG_VYKD);
+	
+		Resource r = new Resource(ResourceType.PROG_VYKD);            
 		FromGUIDescriptor descriptor = new FromGUIDescriptor();
 		descriptor.setFileName("programa1.txt");
 		r.setDescriptor(descriptor);
 		resourceList.addResource(r);
 		
-//		r = new Resource(ResourceType.PROG_VYKD);
-//		descriptor = new FromGUIDescriptor();
-//		descriptor.setFileName("Fibo_2.ltu");
-//		r.setDescriptor(descriptor);
-//		resourceList.addResource(r);
+
+	r = new Resource(ResourceType.PROG_VYKD);
+		descriptor = new FromGUIDescriptor();
+		descriptor.setFileName("programa.txt");
+	r.setDescriptor(descriptor);
+		resourceList.addResource(r);
+
 
 		running = true;
 		while (running) {
@@ -42,6 +42,9 @@ public class Main {
 //				 System.out.println(process + " žingsnis: " +
 //				 process.getStep() + " prioritetas: " +
 //				 process.getPriority());
+                                //System.out.println("*************************");
+                                //System.out.println(process.getClass() +" "+ process.getPid() +" "+ process.getType());
+                                //System.out.println("*************************");
 				process.nextStep();
 			}
 			try {

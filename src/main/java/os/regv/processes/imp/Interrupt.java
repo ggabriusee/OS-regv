@@ -2,6 +2,7 @@ package os.regv.processes.imp;
 
 import os.regv.Main;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.InterruptDescriptor;
@@ -19,6 +20,10 @@ public class Interrupt extends Process {
     private Resource interrupt;
     private Process jobGovernor;
     private InterruptDescriptor intDes;
+    
+    public Interrupt() {
+		this.type = ProcessType.SYSTEM;
+        }
 
     @Override
     public void nextStep() {

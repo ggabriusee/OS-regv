@@ -12,7 +12,7 @@ public class ResourceList {
 	}
 	
 	public void addResource(Resource resource) {
-		System.out.println("Naujas resursas: " + resource.getName());
+		System.out.println("resource " + resource.getName() + " created");
 		this.list.add(resource);
 	}
 	

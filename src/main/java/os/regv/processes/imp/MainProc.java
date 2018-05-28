@@ -2,6 +2,7 @@ package os.regv.processes.imp;
 
 import os.regv.Main;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.ProgramInHDDDescriptor;
@@ -17,6 +18,9 @@ public class MainProc extends Process {
 	private Resource resourceToDestroy;
 	private int pidToDestroy;
 
+        public MainProc() {
+		this.type = ProcessType.SYSTEM;
+        }
 	@Override
 	public void nextStep() {
 		Resource res;

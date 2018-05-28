@@ -1,9 +1,11 @@
 package os.regv.processes.imp;
 
 import os.regv.Main;
+import os.regv.os.VirtualMachine;
 //>>>>import os.regv.hardware.ChannelsDevice.ChannelsDevice;
 //>>>>import os.regv.hardware.memory.VMMemory;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.LoaderPacketDescriptor;
@@ -18,9 +20,14 @@ import os.regv.resources.descriptors.LoaderPacketDescriptor;
 public class Loader extends Process {
 	
 	//>>>>private VMMemory vmm;
+        VirtualMachine vm;
 	private int[] programName;
 	private JobGovernor jg;
 
+        public Loader() {
+		this.type = ProcessType.SYSTEM;
+        }
+        
 	@Override
 	public void nextStep() {
 		Resource res;

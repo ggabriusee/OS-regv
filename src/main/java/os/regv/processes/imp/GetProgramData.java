@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import os.regv.Main;
 import os.regv.os.HardDisk;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.FromGUIDescriptor;
@@ -32,6 +33,9 @@ public class GetProgramData extends Process {
 	//private int[] content;
         BufferedReader br;
 
+        public GetProgramData() {
+		this.type = ProcessType.SYSTEM;
+	}
 	@Override
 	public void nextStep() {
 		Resource res;

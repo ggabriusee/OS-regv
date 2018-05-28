@@ -1,6 +1,7 @@
 package os.regv.processes.imp;
 
 import os.regv.Main;
+import os.regv.os.CPU;
 //import os.regv.hardware.memory.RMMemory;
 //import os.regv.hardware.memory.VMMemory;
 import os.regv.os.VirtualMachine;
@@ -11,6 +12,7 @@ import os.regv.resources.descriptors.InterruptDescriptor;
 import os.regv.resources.descriptors.LoaderPacketDescriptor;
 import os.regv.resources.descriptors.ProgramInHDDDescriptor;
 import os.regv.os.InterruptHandler;
+import os.regv.processes.ProcessType;
 
 /**
  * Proceso „JobGorvernor“ paskirtis – kurti, naikinti ir padėti procesui
@@ -32,6 +34,7 @@ public class JobGovernor extends Process {
 
     public JobGovernor(Resource progInHdd) {
         this.progInHddRes = progInHdd;
+        this.type = ProcessType.USER;
     }
 
     @Override
@@ -41,7 +44,22 @@ public class JobGovernor extends Process {
             case (0):
                 try {
                     //>>vmm = RMMemory.createVMMemory();
-                    vmm = new VirtualMachine(os.regv.Main.cpu.getMem());
+                    
+                    //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    //System.out.println(os.regv.Main.cpu.getMemoryList().size());
+                    //os.regv.Main.cpu.getMemoryList().get(0).show_Memory();
+//                    if(CPU.jauBuvo == true){
+//                        vmm = new VirtualMachine(os.regv.Main.cpu.getMemoryList().get(0));
+//                        CPU.jauBuvo = false;
+//                    }else{
+//                        vmm = new VirtualMachine(os.regv.Main.cpu.getMemoryList2().get(0));
+//                    }
+                        if(CPU.jauBuvo == false){
+                            vmm = new VirtualMachine(os.regv.Main.cpu.getMem1());
+                            CPU.jauBuvo = false;
+                        }else{
+                            vmm = new VirtualMachine(os.regv.Main.cpu.getMem2());
+                        }
                 } catch (RuntimeException e) {
                     this.changeStep(0);
                     break;

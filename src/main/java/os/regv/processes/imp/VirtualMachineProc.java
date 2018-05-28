@@ -7,6 +7,7 @@ import os.regv.os.CPU;
 import os.regv.os.InterruptHandler;
 import os.regv.os.VirtualMachine;
 import os.regv.processes.Process;
+import os.regv.processes.ProcessType;
 import os.regv.resources.Resource;
 import os.regv.resources.ResourceType;
 import os.regv.resources.descriptors.InterruptDescriptor;
@@ -33,6 +34,7 @@ public class VirtualMachineProc extends Process {
     public VirtualMachineProc(VirtualMachine vmm, Process parent) {
         this.vmm = vmm;
         this.parentOfVM = parent;
+        this.type = ProcessType.USER;
     }
     
     public void setStep(int step){

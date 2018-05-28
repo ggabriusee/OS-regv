@@ -68,8 +68,11 @@ public class VirtualMachine {
         output="";
         //String pg = Long.toString(mem.allocate_Memory());
         //page.add(Integer.parseInt(pg));
-        page.add((int) mem.allocate_Memory());
+        //page.add((int) mem.allocate_Memory());
+        page.add(0);
         PTR = 30;
+        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        //mem.show_Memory();
     }
     
     
@@ -231,13 +234,15 @@ public void go(int block, int word){
 
     //Registras + atminties adresas
     public long addition(long adr){
-
-      long value1[] = { (adr & 0xFF000000) / 0x1000000, (adr & 0xFF0000) / 0x10000, (adr & 0xFF00) / 0x100, adr & 0xFF };
-      long value2[] = { (R & 0xFF000000) / 0x1000000, (R & 0xFF0000) / 0x10000, (R & 0xFF00) / 0x100, R & 0xFF };  
-
+      char[] value1 = { (char)((adr & 0xFF000000) / 0x1000000), (char)((adr & 0xFF0000) / 0x10000), 
+                           (char)((adr & 0xFF00) / 0x100), (char)((adr & 0xFF)) };
+      char[] value2 = { (char)((R & 0xFF000000) / 0x1000000), (char)((R & 0xFF0000) / 0x10000), 
+                           (char)((R & 0xFF00) / 0x100), (char)((R & 0xFF)) }; 
+	
       //Gaunami desimtainiai skaiciai
-      int get_value_1 = (int) ((value1[0])*1000 + (value1[1])*100 + (value1[2])*10 + value1[3]);
-      int get_value_2 = (int) ((value2[0])*1000 + (value2[1])*100 + (value2[2])*10 + value2[3]);
+	int get_value_1 = Integer.parseInt(new String(value1));
+	int get_value_2 = Integer.parseInt(new String(value2));
+
       int total_sum = get_value_1 + get_value_2;
 
       if (total_sum > 9999){
@@ -247,11 +252,12 @@ public void go(int block, int word){
       int sum1 = total_sum/1000;
       int sum2 = (total_sum%1000)/100;
       int sum3 = (total_sum%100)/10;
-      int sum4 = total_sum%10;   
-      sum1 = sum1 + 48;
-      sum2 = sum2 + 48; 
-      sum3 = sum3 + 48; 
-      sum4 = sum4 + 48;
+      int sum4 = total_sum%10;
+  
+      sum1 = sum1 + '0';
+      sum2 = sum2 + '0'; 
+      sum3 = sum3 + '0'; 
+      sum4 = sum4 + '0';
 
       return (sum1 * 0x1000000 + sum2 * 0x10000 + sum3 * 0x100 + sum4);
     }
@@ -259,11 +265,14 @@ public void go(int block, int word){
     //substraction: registras - atmintis su adresu
     public long substraction(long adr){ 
 
-      long[] line1 = { (adr & 0xFF000000) / 0x1000000, (adr & 0xFF0000) / 0x10000, (adr & 0xFF00) / 0x100, adr & 0xFF };
-      long[] line2 = { (R & 0xFF000000) / 0x1000000, (R & 0xFF0000) / 0x10000, (R & 0xFF00) / 0x100, R & 0xFF }; 
+      char[] line1 = { (char)((adr & 0xFF000000) / 0x1000000), (char)((adr & 0xFF0000) / 0x10000),
+                         (char)((adr & 0xFF00) / 0x100), (char)((adr & 0xFF)) };
+      char[] line2 = { (char)((R & 0xFF000000) / 0x1000000), (char)((R & 0xFF0000) / 0x10000),
+                          (char)((R & 0xFF00) / 0x100), (char)((R & 0xFF)) }; 
 
-      int nr_1 = (int) ((line1[0])*1000 + (line1[1])*100 + (line1[2])*10 + line1[3]);
-      int nr_2 = (int) ((line2[0])*1000 + (line2[1])*100 + (line2[2])*10 + line2[3]);
+      int nr_1 = Integer.parseInt(new String(line1));
+      int nr_2 = Integer.parseInt(new String(line2));
+      
       int substract = nr_1 - nr_2;
 
       if (substract < 0){
@@ -276,10 +285,10 @@ public void go(int block, int word){
       int minus3 = (substract%100)/10;
       int minus4 = substract%10;
 
-      minus1 = minus1 + 48;
-      minus2 = minus2 + 48;
-      minus3 = minus3 + 48;
-      minus4 = minus4 + 48;
+      minus1 = minus1 + '0';
+      minus2 = minus2 + '0';
+      minus3 = minus3 + '0';
+      minus4 = minus4 + '0';
 
       long result = minus1 * 0x1000000 + minus2 * 0x10000 + minus3 * 0x100 + minus4;
       return result;
@@ -287,11 +296,14 @@ public void go(int block, int word){
 
     public long multiplication(long adr){ 
 
-      long line1[] = { (adr & 0xFF000000) / 0x1000000, (adr & 0xFF0000) / 0x10000, (adr & 0xFF00) / 0x100, adr & 0xFF };
-      long line2[] = { (R & 0xFF000000) / 0x1000000, (R & 0xFF0000) / 0x10000, (R & 0xFF00) / 0x100, R & 0xFF }; 
+      char[] line1 = { (char)((adr & 0xFF000000) / 0x1000000), (char)((adr & 0xFF0000) / 0x10000),
+                        (char)((adr & 0xFF00) / 0x100), (char)((adr & 0xFF)) };
+      char[] line2 = { (char)((R & 0xFF000000) / 0x1000000), (char)((R & 0xFF0000) / 0x10000),
+                        (char)((R & 0xFF00) / 0x100), (char)((R & 0xFF)) }; 
 
-      int nr_1 = (int) ((line1[0])*1000 + (line1[1])*100 + (line1[2])*10 + line1[3]);
-      int nr_2 = (int) ((line2[0])*1000 + (line2[1])*100 + (line2[2])*10 + line2[3]);
+      int nr_1 = Integer.parseInt(new String(line1));
+      int nr_2 = Integer.parseInt(new String(line2));
+
       int multiplication = nr_1 * nr_2;
 
       if ((nr_1 < 0) || (nr_1 < 0) || (multiplication > 9999)){
@@ -304,23 +316,28 @@ public void go(int block, int word){
         int mul3 = (multiplication%100)/10;
         int mul4 = multiplication%10;
 
-        mul1 = mul1 + 48;
-        mul2 = mul2 + 48;
-        mul3 = mul3 + 48;
-        mul4 = mul4 + 48;
+        mul1 = mul1 + '0';
+        mul2 = mul2 + '0';
+        mul3 = mul3 + '0';
+        mul4 = mul4 + '0';
 
         long result = mul1 * 0x1000000 + mul2 * 0x10000 + mul3 * 0x100 + mul4;
         return result;
       }
     }
+
     public long division(long adr){ 
 
-      long line1[] = { (adr & 0xFF000000) / 0x1000000, (adr & 0xFF0000) / 0x10000, (adr & 0xFF00) / 0x100, adr & 0xFF };
-      long line2[] = { (R & 0xFF000000) / 0x1000000, (R & 0xFF0000) / 0x10000, (R & 0xFF00) / 0x100, R & 0xFF }; 
+      char[] line1 = { (char)((adr & 0xFF000000) / 0x1000000), (char)((adr & 0xFF0000) / 0x10000),
+                         (char)((adr & 0xFF00) / 0x100), (char)((adr & 0xFF)) };
+      char[] line2 = { (char)((R & 0xFF000000) / 0x1000000), (char)((R & 0xFF0000) / 0x10000),
+                         (char)((R & 0xFF00) / 0x100), (char)((R & 0xFF)) }; 
 
-      int nr_1 = (int) ((line1[0])*1000 + (line1[1])*100 + (line1[2])*10 + line1[3]);
-      int nr_2 = (int) ((line2[0])*1000 + (line2[1])*100 + (line2[2])*10 + line2[3]);
+      int nr_1 = Integer.parseInt(new String(line1));
+      int nr_2 = Integer.parseInt(new String(line2));
+
       if(nr_2 == 0){setPI(7);return -1;}
+
       int division = nr_1 / nr_2;
 
       if ((nr_1 < 0) || (nr_1 < 0) || (division > 9999)){
@@ -333,10 +350,10 @@ public void go(int block, int word){
         int div3 = (division%100)/10;
         int div4 = division%10;
 
-        div1 = div1 + 48;
-        div2 = div2 + 48;
-        div3 = div3 + 48;
-        div4 = div4 + 48;
+        div1 = div1 + '0';
+        div2 = div2 + '0';
+        div3 = div3 + '0';
+        div4 = div4 + '0';
 
         long result = div1 * 0x1000000 + div2 * 0x10000 + div3 * 0x100 + div4;
         return result;
@@ -345,12 +362,16 @@ public void go(int block, int word){
 
     public long modular(long adr){ 
 
-      long line1[] = { (adr & 0xFF000000) / 0x1000000, (adr & 0xFF0000) / 0x10000, (adr & 0xFF00) / 0x100, adr & 0xFF };
-      long line2[] = { (R & 0xFF000000) / 0x1000000, (R & 0xFF0000) / 0x10000, (R & 0xFF00) / 0x100, R & 0xFF }; 
+      char[] line1 = { (char)((adr & 0xFF000000) / 0x1000000), (char)((adr & 0xFF0000) / 0x10000),
+                         (char)((adr & 0xFF00) / 0x100), (char)((adr & 0xFF)) };
+      char[] line2 = { (char)((R & 0xFF000000) / 0x1000000), (char)((R & 0xFF0000) / 0x10000),
+                         (char)((R & 0xFF00) / 0x100), (char)((R & 0xFF)) }; 
 
-      int nr_1 = (int) ((line1[0])*1000 + (line1[1])*100 + (line1[2])*10 + line1[3]);
-      int nr_2 = (int) ((line2[0])*1000 + (line2[1])*100 + (line2[2])*10 + line2[3]);
+      int nr_1 = Integer.parseInt(new String(line1));
+      int nr_2 = Integer.parseInt(new String(line1));
+
       if(nr_2 == 0){setPI(7);return -1;}
+
       int module = nr_1 % nr_2;
 
       if ((nr_1 < 0) || (nr_1 < 0) || (module > 9999)){
@@ -363,10 +384,10 @@ public void go(int block, int word){
         int mod3 = (module%100)/10;
         int mod4 = module%10;
 
-        mod1 = mod1 + 48;
-        mod2 = mod2 + 48;
-        mod3 = mod3 + 48;
-        mod4 = mod4 + 48;
+        mod1 = mod1 + '0';
+        mod2 = mod2 + '0';
+        mod3 = mod3 + '0';
+        mod4 = mod4 + '0';
 
         long result = mod1 * 0x1000000 + mod2 * 0x10000 + mod3 * 0x100 + mod4;
         return result;
